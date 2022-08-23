@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 class ReusableCard extends StatelessWidget {
+//stateless widgets are immutable
 
   ReusableCard({required this.colour});
-   Color colour;
-
+   final Color colour;
+//the final keyword
   @override
   Widget build(BuildContext context) {
     return Container(
