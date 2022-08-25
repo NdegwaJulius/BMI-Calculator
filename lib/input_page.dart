@@ -6,8 +6,11 @@ const bottomContainerHeight = 80.0;
 const bottomBarText = 'Calculate';
 const themeColor = Color(0xFF1D1E33);
 const bottomContainerColor = Color(0xFFEB1555);
+const appBarTitle = 'BMI CALCULATOR';
 // Final means single-assignment.
 // Const means immutable.
+//A final variable can be set only once; a const variable is a compile-time constant.
+// (Const variables are implicitly final.)
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
@@ -19,7 +22,7 @@ class _InputPageState extends State<InputPage> {
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Color(0xFF090C22),
-        title: Text('BMI CALCULATOR'),
+        title: Text(appBarTitle),
       ),
       body: Column(
         children:<Widget> [
