@@ -13,7 +13,7 @@ final String label;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children:  <Widget>[
-        Icon(icon),
+        Icon(icon,size: 80,),
         SizedBox(height: 10.0,),
         Text(style: TextStyle(fontSize: 18.0,color: Color(0xFF8D8E98),),label,),
       ],

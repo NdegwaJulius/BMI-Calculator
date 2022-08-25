@@ -7,6 +7,7 @@ import 'ReusableCard.dart';
 const bottomContainerHeight = 80.0;
 const bottomBarText = 'Calculate';
 const themeColor = Color(0xFF1D1E33);
+const inactiveColor = Color(0xFF111328);
 const bottomContainerColor = Color(0xFFEB1555);
 const appBarTitle = 'BMI CALCULATOR';
 // Final means single-assignment.
@@ -19,22 +20,65 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  @override
+  Color maleCardColor = inactiveColor;
+  Color femaleCardColor = inactiveColor;
+
+  void updateColor (int gender){
+    if (gender == 1){
+      if (maleCardColor == inactiveColor){
+        maleCardColor = themeColor;
+        femaleCardColor = inactiveColor;
+      } else {
+        maleCardColor = inactiveColor;
+      }
+
+
+    }
+    if (gender == 2){
+      if (femaleCardColor == inactiveColor){
+        femaleCardColor = themeColor;
+        maleCardColor = inactiveColor;
+      } else {
+        femaleCardColor = inactiveColor;
+      }
+
+
+    }
+  }
+
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Color(0xFF090C22),
-        title: Text(appBarTitle),
+        title: const Text(appBarTitle),
       ),
       body: Column(
         children:<Widget> [
          Expanded(
            child: Row(
              children: <Widget>[
-               Expanded(child: ReusableCard(colour: themeColor,
-                 cardChild: IconContentWidget(icon: FontAwesomeIcons.mars,label:'MALE' ,),),),
-              Expanded(child: ReusableCard(colour: themeColor,
-                cardChild: IconContentWidget(icon: FontAwesomeIcons.venus,label: 'FEMALE',),),),
+               Expanded(child:
+               GestureDetector(
+                 onTap: (){
+                   setState(() {
+                     updateColor(1);
+                   });
+
+                 },
+                 child: ReusableCard(colour: maleCardColor,
+                   cardChild: const IconContentWidget(icon: FontAwesomeIcons.mars,label:'MALE' ,),),
+               ),),
+              Expanded(child: GestureDetector(
+                onTap: (){
+                  setState(() {
+                    updateColor(2);
+                  });
+
+                },
+                child: ReusableCard(colour: femaleCardColor,
+                  cardChild: const IconContentWidget(icon: FontAwesomeIcons.venus,label: 'FEMALE',),),
+              ),),
 
              ],
            ),
@@ -42,7 +86,7 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: <Widget>[
-                Expanded(child:ReusableCard(colour: themeColor, cardChild: IconContentWidget(icon: FontAwesomeIcons.mars,label:'MALE' ,),),),
+                Expanded(child:ReusableCard(colour: themeColor, cardChild: const IconContentWidget(icon: FontAwesomeIcons.mars,label:'MALE' ,),),),
 
               ],
             ),
@@ -50,18 +94,18 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: <Widget>[
-                Expanded(child: ReusableCard(colour: themeColor, cardChild: IconContentWidget(icon: FontAwesomeIcons.mars,label:'MALE' ,),),),
-                Expanded(child: ReusableCard(colour: themeColor, cardChild: IconContentWidget(icon: FontAwesomeIcons.mars,label:'MALE' ,),),),
+                Expanded(child: ReusableCard(colour: themeColor, cardChild: const IconContentWidget(icon: FontAwesomeIcons.mars,label:'MALE' ,),),),
+                Expanded(child: ReusableCard(colour: themeColor, cardChild: const IconContentWidget(icon: FontAwesomeIcons.mars,label:'MALE' ,),),),
 
               ],
             ),
           ),
           Container(
             color: bottomContainerColor ,
-            margin: EdgeInsets.only(top: 10.0),
+            margin: const EdgeInsets.only(top: 10.0),
             width: double.infinity,
             height: bottomContainerHeight,
-            child: Center(
+            child: const Center(
               child: Text(bottomBarText,
               style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
               ),
