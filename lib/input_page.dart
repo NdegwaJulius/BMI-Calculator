@@ -14,6 +14,13 @@ const appBarTitle = 'BMI CALCULATOR';
 // Const means immutable.
 //A final variable can be set only once; a const variable is a compile-time constant.
 // (Const variables are implicitly final.)
+enum Gender{
+  male,
+  female,
+}
+
+
+
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
@@ -23,8 +30,8 @@ class _InputPageState extends State<InputPage> {
   Color maleCardColor = inactiveColor;
   Color femaleCardColor = inactiveColor;
 
-  void updateColor (int gender){
-    if (gender == 1){
+  void updateColor (Gender selectedGender){
+    if (Gender == Gender.male){
       if (maleCardColor == inactiveColor){
         maleCardColor = themeColor;
         femaleCardColor = inactiveColor;
@@ -34,7 +41,7 @@ class _InputPageState extends State<InputPage> {
 
 
     }
-    if (gender == 2){
+    if (Gender == Gender.female){
       if (femaleCardColor == inactiveColor){
         femaleCardColor = themeColor;
         maleCardColor = inactiveColor;
@@ -62,7 +69,7 @@ class _InputPageState extends State<InputPage> {
                GestureDetector(
                  onTap: (){
                    setState(() {
-                     updateColor(1);
+                     updateColor(Gender.male);
                    });
 
                  },
@@ -72,7 +79,7 @@ class _InputPageState extends State<InputPage> {
               Expanded(child: GestureDetector(
                 onTap: (){
                   setState(() {
-                    updateColor(2);
+                    updateColor(Gender.female);
                   });
 
                 },
