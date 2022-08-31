@@ -38,7 +38,7 @@ class _InputPageState extends State<InputPage> {
 
     @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       appBar: AppBar(
         // backgroundColor: Color(0xFF090C22),
         title: const Text(appBarTitle),
