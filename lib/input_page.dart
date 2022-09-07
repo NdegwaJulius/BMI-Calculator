@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'ReusableCard.dart';
 import 'constants.dart';
+import 'slider.dart';
 
 // Final means single-assignment.
 // Const means immutable.
@@ -28,7 +29,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
 
       Gender ? SelectedGender;
-      int height=100;
+      //int height=100;
 
 
 
@@ -83,7 +84,7 @@ class _InputPageState extends State<InputPage> {
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
                         children: <Widget>[
-                          Text(height.toString(),
+                          Text(kHeight.toString(),
                           style: kLabelNumberStyle,
                           ),
 
@@ -92,18 +93,7 @@ class _InputPageState extends State<InputPage> {
                           )
                         ],
                       ),
-                      Slider(
-                          value: height.toDouble(),
-                          min: 90.0,
-                          max: 250.0,
-                          activeColor: Color(0xFFEB1555),
-                          inactiveColor: Color(0xFF8D8E98),
-                          onChanged: (double newValue){
-                            setState(() {
-                              height = newValue.round();
-
-                            });
-                          })
+                     sliderClass()
                     ],
                   )
                 ),
