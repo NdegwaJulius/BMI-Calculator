@@ -31,7 +31,8 @@ class _InputPageState extends State<InputPage> {
 
       Gender ? SelectedGender;
       int height=100;
-      int weight = 10;
+      int weight = 30;
+      int age = 20;
 
 
 
@@ -143,19 +144,20 @@ class _InputPageState extends State<InputPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           RoundIconButton(
+                            icon: FontAwesomeIcons.minus,
                             onPressed: (){
                               setState(() {
                                  weight--;
                               });
                             },
-                              icon: FontAwesomeIcons.minus
+
                           ),
                           const SizedBox(width: 15.0,),
                           RoundIconButton(
                               icon: FontAwesomeIcons.plus,
                                    onPressed: (){
                                 setState(() {
-                                  weight++;
+                              weight++;
                                 });
                                    },
                           ),
