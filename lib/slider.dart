@@ -1,7 +1,5 @@
 import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
-import 'input_page.dart';
-import 'constants.dart';
 
 class sliderClass extends StatefulWidget {
   const sliderClass({Key? key}) : super(key: key);
@@ -11,7 +9,7 @@ class sliderClass extends StatefulWidget {
 }
 
 class _sliderClassState extends State<sliderClass> {
-  int height = kHeight;
+  int height = 120;
 
   //get height => null;
 
@@ -28,7 +26,7 @@ class _sliderClassState extends State<sliderClass> {
         thumbColor:Color(0xFFEB1555),
       ),
       child: Slider(
-          value: kHeight.toDouble(),
+          value: height.toDouble(),
           min: 90.0,
           max: 250.0,
           activeColor: Color(0xFFEB1555),

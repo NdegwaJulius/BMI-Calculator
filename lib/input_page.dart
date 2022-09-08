@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/IconContentWidget.dart';
+import 'package:bmi_calculator/RoundIconButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
 
       Gender ? SelectedGender;
-      //int height=100;
+      int height=100;
+      int weight = 10;
 
 
 
@@ -84,16 +86,37 @@ class _InputPageState extends State<InputPage> {
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
                         children: <Widget>[
-                          Text(kHeight.toString(),
+                          Text(height.toString(),
                           style: kLabelNumberStyle,
                           ),
 
                           Text("cm",
                           style: kLabelTextStyle,
-                          )
+                          ),
                         ],
                       ),
-                     sliderClass()
+      SliderTheme(
+      data: SliderTheme.of(context).copyWith(
+      inactiveTrackColor:  Color(0xFF8D8E98),
+      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
+      overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
+      activeTrackColor: Colors.white,
+      overlayColor: Color(0x29EB1555),
+      thumbColor:Color(0xFFEB1555),
+      ),
+      child: Slider(
+      value: height.toDouble(),
+      min: 90.0,
+      max: 250.0,
+      activeColor: Color(0xFFEB1555),
+      inactiveColor: Color(0xFF8D8E98),
+      onChanged: (double newValue){
+      setState(() {
+       height = newValue.round();
+
+      });
+      }),
+      )
                     ],
                   )
                 ),
@@ -105,7 +128,45 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: <Widget>[
-                Expanded(child: ReusableCard(colour: kThemeColor, cardChild: const IconContentWidget(icon: FontAwesomeIcons.weightScale,label:'WEIGHT' ,),),),
+                Expanded(child: ReusableCard(
+                  colour: kThemeColor,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('WEIGHT',
+                      style: kLabelTextStyle,
+                      ),
+                      Text(weight.toString(),
+                      style: kLabelNumberStyle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundIconButton(
+                            onPressed: (){
+                              setState(() {
+                                 weight--;
+                              });
+                            },
+                              icon: FontAwesomeIcons.minus
+                          ),
+                          const SizedBox(width: 15.0,),
+                          RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                                   onPressed: (){
+                                setState(() {
+                                  weight++;
+                                });
+                                   },
+                          ),
+
+                         ],
+                      )
+
+
+                    ],
+                  )
+                  ,),),
                 Expanded(child: ReusableCard(colour: kThemeColor, cardChild: const IconContentWidget(icon: FontAwesomeIcons.baby,label:'AGE' ,),),),
 
               ],
