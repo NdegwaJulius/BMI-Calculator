@@ -1,13 +1,15 @@
-import 'package:bmi_calculator/IconContentWidget.dart';
-import 'package:bmi_calculator/RoundIconButton.dart';
+import 'package:bmi_calculator/components/IconContentWidget.dart';
+import 'package:bmi_calculator/components/RoundIconButton.dart';
+import 'package:bmi_calculator/screens/results_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'results_page.dart';
 
-import 'ReusableCard.dart';
-import 'constants.dart';
-import 'slider.dart';
+import '../components/ReusableCard.dart';
+import '../constants/constants.dart';
+import '../slider.dart';
 
 // Final means single-assignment.
 // Const means immutable.
@@ -91,30 +93,24 @@ class _InputPageState extends State<InputPage> {
                           style: kLabelNumberStyle,
                           ),
 
-                          Text("cm",
-                          style: kLabelTextStyle,
+                          Text("cm",style: kLabelTextStyle,
                           ),
                         ],
                       ),
-      SliderTheme(
-      data: SliderTheme.of(context).copyWith(
-      inactiveTrackColor:  Color(0xFF8D8E98),
-      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
-      overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
-      activeTrackColor: Colors.white,
-      overlayColor: Color(0x29EB1555),
-      thumbColor:Color(0xFFEB1555),
-      ),
-      child: Slider(
-      value: height.toDouble(),
-      min: 90.0,
-      max: 250.0,
-      activeColor: Color(0xFFEB1555),
-      inactiveColor: Color(0xFF8D8E98),
-      onChanged: (double newValue){
-      setState(() {
-       height = newValue.round();
-
+                      SliderTheme(data: SliderTheme.of(context).copyWith(inactiveTrackColor:  Color(0xFF8D8E98),
+                      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                        overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
+                        activeTrackColor: Colors.white,overlayColor: Color(0x29EB1555),
+                        thumbColor:Color(0xFFEB1555),),
+                          child: Slider(
+                              value: height.toDouble(),
+                              min: 90.0,
+                              max: 250.0,
+                              activeColor: Color(0xFFEB1555),
+                              inactiveColor: Color(0xFF8D8E98),
+                              onChanged: (double newValue){
+                                setState(() {
+                                  height = newValue.round();
       });
       }),
       )
@@ -134,9 +130,7 @@ class _InputPageState extends State<InputPage> {
                   cardChild: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text('WEIGHT',
-                      style: kLabelTextStyle,
-                      ),
+                      const Text('WEIGHT',style: kLabelTextStyle),
                       Text(weight.toString(),
                       style: kLabelNumberStyle,
                       ),
@@ -174,14 +168,21 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColor ,
-            margin: const EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kBottomContainerHeight,
-            child: const Center(
-              child: Text(kBottomBarText,
-              style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ResultsPage())
+              );
+            },
+            child: Container(
+              color: kBottomContainerColor ,
+              margin: const EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: kBottomContainerHeight,
+              child: const Center(
+                child: Text(kBottomBarText,
+                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           )
