@@ -5,11 +5,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../constants/constants.dart';
 
 class IconContentWidget extends StatelessWidget {
-   const IconContentWidget({
+    IconContentWidget({
      required this.icon, required this.label,
   }) ;
-final IconData icon;
-final String label;
+final IconData ? icon;
+final  String ? label;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,7 +17,7 @@ final String label;
       children:  <Widget>[
         Icon(icon,size: 80,),
         SizedBox(height: 10.0,),
-        Text(style:kLabelTextStyle, label,),
+        Text(style:kLabelTextStyle, label!,),
       ],
     );
   }

@@ -23,7 +23,7 @@ enum Gender{
 
 
 class InputPage extends StatefulWidget {
-  const InputPage({Key? key}) : super(key: key);
+  InputPage({Key? key}) : super(key: key);
 
   @override
   _InputPageState createState() => _InputPageState();
@@ -60,7 +60,7 @@ class _InputPageState extends State<InputPage> {
 
                  },
                  child: ReusableCard(colour: SelectedGender == Gender.male ? kThemeColor : kInactiveColor,
-                   cardChild: const IconContentWidget(icon: FontAwesomeIcons.mars,label:'MALE' ,),),
+                   cardChild:  IconContentWidget(icon: FontAwesomeIcons.mars,label:'MALE' ,),),
                ),),
               Expanded(child: GestureDetector(
                 onTap: (){
@@ -70,7 +70,7 @@ class _InputPageState extends State<InputPage> {
 
                 },
                 child: ReusableCard(colour: SelectedGender == Gender.female ? kThemeColor : kInactiveColor,
-                  cardChild: const IconContentWidget(icon: FontAwesomeIcons.venus,label: 'FEMALE',),),
+                  cardChild:  IconContentWidget(icon: FontAwesomeIcons.venus,label: 'FEMALE',),),
               ),),
 
              ],
@@ -125,46 +125,90 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: <Widget>[
-                Expanded(child: ReusableCard(
-                  colour: kThemeColor,
-                  cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      const Text('WEIGHT',style: kLabelTextStyle),
-                      Text(weight.toString(),
-                      style: kLabelNumberStyle,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RoundIconButton(
-                            icon: FontAwesomeIcons.minus,
-                            onPressed: (){
-                              setState(() {
-                                 weight--;
-                              });
-                            },
-
-                          ),
-                          const SizedBox(width: 15.0,),
-                          RoundIconButton(
+                Expanded(
+                  child: ReusableCard(
+                    colour: kThemeColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'WEIGHT',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: kLabelNumberStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPressed: () {
+                                  setState(() {
+                                    weight-=1;
+                                  });
+                                }),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
                               icon: FontAwesomeIcons.plus,
-                                   onPressed: (){
+                              onPressed: () {
                                 setState(() {
-                              weight++;
+                                  weight+=1;
                                 });
-                                   },
-                          ),
-
-                         ],
-                      )
-
-
-                    ],
-                  )
-                  ,),),
-                Expanded(child: ReusableCard(colour: kThemeColor, cardChild: const IconContentWidget(icon: FontAwesomeIcons.baby,label:'AGE' ,),),),
-
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ReusableCard(
+                    colour: kThemeColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'AGE',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: kLabelNumberStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState(
+                                      () {
+                                    age -=1;
+                                  },
+                                );
+                              },
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onPressed: () {
+                                  setState(() {
+                                    age+=1;
+                                  });
+                                })
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
