@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/calculator_brain.dart';
 import 'package:bmi_calculator/components/IconContentWidget.dart';
 import 'package:bmi_calculator/components/RoundIconButton.dart';
 import 'package:bmi_calculator/screens/results_page.dart';
@@ -5,11 +6,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../components/BottomButton.dart';
 import 'results_page.dart';
 
 import '../components/ReusableCard.dart';
 import '../constants/constants.dart';
-import '../slider.dart';
+import 'package:bmi_calculator/calculator_brain.dart';
+
 
 // Final means single-assignment.
 // Const means immutable.
@@ -23,7 +26,6 @@ enum Gender{
 
 
 class InputPage extends StatefulWidget {
-  InputPage({Key? key}) : super(key: key);
 
   @override
   _InputPageState createState() => _InputPageState();
@@ -31,7 +33,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
 
-      Gender ? SelectedGender;
+      late Gender  SelectedGender;
       int height=100;
       int weight = 30;
       int age = 20;
@@ -51,76 +53,79 @@ class _InputPageState extends State<InputPage> {
          Expanded(
            child: Row(
              children: <Widget>[
-               Expanded(child:
-               GestureDetector(
-                 onTap: (){
-                   setState(() {
-                     SelectedGender = Gender.male;
-                   });
+               Expanded(
+                 child:ReusableCard(
+                   onPress: (){
+                     setState(() {
+                       SelectedGender == Gender.male;
+                     });
+                   },
+                   colour: SelectedGender == Gender.male ? kThemeColor : kInactiveColor,
+                   cardChild:  IconContentWidget(icon: FontAwesomeIcons.mars,label:'MALE' ,),),),
+               Expanded(
+                 child:ReusableCard(
+                   onPress: (){
+                     setState(() {
+                       SelectedGender == Gender.female;
+                     });
+                   },
+                   colour: SelectedGender == Gender.female ? kThemeColor : kInactiveColor,
+                   cardChild:  IconContentWidget(icon: FontAwesomeIcons.venus,label:'FEMALE' ,),),),
 
-                 },
-                 child: ReusableCard(colour: SelectedGender == Gender.male ? kThemeColor : kInactiveColor,
-                   cardChild:  IconContentWidget(icon: FontAwesomeIcons.mars,label:'MALE' ,),),
-               ),),
-              Expanded(child: GestureDetector(
-                onTap: (){
-                  setState(() {
-                    SelectedGender = Gender.female;
-                  });
-
-                },
-                child: ReusableCard(colour: SelectedGender == Gender.female ? kThemeColor : kInactiveColor,
-                  cardChild:  IconContentWidget(icon: FontAwesomeIcons.venus,label: 'FEMALE',),),
-              ),),
 
              ],
            ),
          ),
           Expanded(
-            child: Row(
+              child: ReusableCard(
+              colour: kThemeColor,
+              cardChild: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Expanded(child:ReusableCard(colour: kThemeColor,
-                  cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text("HEIGHT",style: kLabelTextStyle),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: <Widget>[
-                          Text(height.toString(),
-                          style: kLabelNumberStyle,
-                          ),
-
-                          Text("cm",style: kLabelTextStyle,
-                          ),
-                        ],
-                      ),
-                      SliderTheme(data: SliderTheme.of(context).copyWith(inactiveTrackColor:  Color(0xFF8D8E98),
-                      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
-                        overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
-                        activeTrackColor: Colors.white,overlayColor: Color(0x29EB1555),
-                        thumbColor:Color(0xFFEB1555),),
-                          child: Slider(
-                              value: height.toDouble(),
-                              min: 90.0,
-                              max: 250.0,
-                              activeColor: Color(0xFFEB1555),
-                              inactiveColor: Color(0xFF8D8E98),
-                              onChanged: (double newValue){
-                                setState(() {
-                                  height = newValue.round();
-      });
-      }),
-      )
-                    ],
-                  )
+              Text(
+              'HEIGHT',
+              style: kLabelTextStyle,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: <Widget>[
+              Text(
+                height.toString(),
+                style: kLabelNumberStyle,
+              ),
+              Text(
+                'cm',
+                style: kLabelTextStyle,
+              )
+            ],
+          ),
+                SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    inactiveTrackColor: Color(0xFF8D8E98),
+                    activeTrackColor: Colors.white,
+                    thumbColor: Color(0xFFEB1555),
+                    overlayColor: Color(0x29EB1555),
+                    thumbShape:
+                    RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                    overlayShape:
+                    RoundSliderOverlayShape(overlayRadius: 30.0),
+                  ),
+                  child: Slider(
+                    value: height.toDouble(),
+                    min: 120.0,
+                    max: 220.0,
+                    onChanged: (double newValue) {
+                      setState(() {
+                        height = newValue.round();
+                      });
+                    },
+                  ),
                 ),
-                ),
-
               ],
-            ),
+              ),
+              ),
           ),
           Expanded(
             child: Row(
@@ -212,41 +217,26 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          BottomButton(onTap: (){}, buttonTitle: '',
+          BottomButton(
+            buttonTitle: 'CALCULATE',
+            onTap: (){
+              CalculatorBrain calc = CalculatorBrain(height:height,  weight : weight);
 
-          )
-
-
-
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(
+                    bmiResult: calc.CalculateBMI(),
+                    resultText: calc.getResult(),
+                    interpretation: calc.getIntepretation(),
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
-
     );
-  }
-
-}
-
-class BottomButton extends StatelessWidget {
- BottomButton({required this.onTap, required this.buttonTitle,});
-  final Function onTap;
- final String buttonTitle;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (){},
-            child: Container(
-        color: kBottomContainerColor ,
-        margin: const EdgeInsets.only(top: 10.0),
-        width: double.infinity,
-        height: kBottomContainerHeight,
-        child: const Center(
-          child: Text(kBottomBarText,
-          style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
-          ),
-        ),
-      ),
-    );
-  }
+    }
 }
 

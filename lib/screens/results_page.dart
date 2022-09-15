@@ -2,14 +2,15 @@ import 'package:bmi_calculator/components/ReusableCard.dart';
 import 'package:bmi_calculator/constants/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../components/BottomButton.dart';
+
 
 class ResultsPage extends StatelessWidget {
   ResultsPage(
       {
         required this.interpretation,
         required this.bmiResult,
-        required this.resultText
-      });
+        required this.resultText});
 
   final String bmiResult;
   final String resultText;
@@ -23,37 +24,51 @@ class ResultsPage extends StatelessWidget {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Expanded(child: Container(child: Text("Your Result",style: kTitleTextStyle,),),),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(15.0),
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                'Your Result',
+                style: kTitleTextStyle,
+              ),
+            ),
+          ),
           Expanded(
             flex: 5,
             child: ReusableCard(
               colour: kThemeColor,
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment:CrossAxisAlignment.center ,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                        'Normal',
+                    resultText.toUpperCase(),
                     style: kResultTextStyle,
-                  ) ,
+                  ),
                   Text(
-                    '15.9',
+                    bmiResult,
                     style: kBMITextStyle,
-                  ) ,
+                  ),
                   Text(
-                    'Eat more you BMI Is wanting, eat more food buddy',
-                    style: kBodyTextStyle,
+                    interpretation,
                     textAlign: TextAlign.center,
-                  ) ,
-
+                    style: kBodyTextStyle,
+                  ),
                 ],
               ),
             ),
           ),
-
+          BottomButton(
+            buttonTitle: 'RE-CALCULATE',
+            onTap: () {
+              Navigator.pop(context);
+            },
+          )
         ],
-      )
+      ),
     );
   }
 }
