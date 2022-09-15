@@ -212,23 +212,8 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
-            onTap: (){
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ResultsPage())
-              );
-            },
-            child: Container(
-              color: kBottomContainerColor ,
-              margin: const EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: kBottomContainerHeight,
-              child: const Center(
-                child: Text(kBottomBarText,
-                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
+          BottomButton(onTap: (){}, buttonTitle: '',
+
           )
 
 
@@ -239,5 +224,29 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
+}
+
+class BottomButton extends StatelessWidget {
+ BottomButton({required this.onTap, required this.buttonTitle,});
+  final Function onTap;
+ final String buttonTitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){},
+            child: Container(
+        color: kBottomContainerColor ,
+        margin: const EdgeInsets.only(top: 10.0),
+        width: double.infinity,
+        height: kBottomContainerHeight,
+        child: const Center(
+          child: Text(kBottomBarText,
+          style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    );
+  }
 }
 

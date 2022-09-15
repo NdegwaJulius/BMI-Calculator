@@ -5,6 +5,7 @@ const kThemeColor = Color(0xFF1D1E33);
 const kInactiveColor = Color(0xFF111328);
 const kBottomContainerColor = Color(0xFFEB1555);
 const kAppBarTitle = 'BMI CALCULATOR';
+const kBottomContainerColour = Color(0xFFEB1555);
 //const int kHeight = 120;
 
 const kLabelTextStyle = TextStyle(
@@ -38,5 +39,12 @@ const kLargeButtonTextStyle = TextStyle(
   fontSize: 25.0,
   fontWeight: FontWeight.bold,
 );
+const kresultsTextStyle = TextStyle(
+  color: Color(0xFF24D876),
+  fontSize: 22.0,
+  fontWeight: FontWeight.bold,
+
+);
+
 
 
